@@ -11,6 +11,7 @@ const Page = (props) => {
     fetchPage();
     fetchLanguages();
   }, []);
+
   useEffect(() => {
     fetchPage();
     document.title = `Klknięto ${language} razy`;
@@ -29,9 +30,9 @@ const Page = (props) => {
           "MediaWiki REST API docs examples/0.1 (https://www.mediawiki.org/wiki/API_talk:REST_API)",
       }
     );
-    const d = await rsp.text();
-    setArticle(d);
-    return d;
+    const data = await rsp.text();
+    setArticle(data);
+    return data;
   }
   async function fetchLanguages() {
     const rsp = await fetch(

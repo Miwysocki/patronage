@@ -1,6 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import Languages from "./Languages";
+import { useState } from "react";
 import Page from "./Page";
 import "./Style.css";
 
@@ -18,7 +17,6 @@ const Search = () => {
       "https://en.wikipedia.org/w/rest.php/v1/search/page?q=" + query
     );
     const data = await rsp.json();
-    console.log(data);
     setData(data);
     setshowArticle(false);
     setLoading(false);
@@ -33,20 +31,19 @@ const Search = () => {
           {" "}
           {data.pages.map((e) => (
             <div className="tile" key={e.id}>
-              {e.thumbnail && (
+              {
                 <a
                   href="#"
                   onClick={() => {
                     setId(e.key);
                     setshowArticle(true);
-                    setHistory((history) => [...history, e.key]);
-                    console.log("history " + history);
+                    setHistory((history) => [...history, e.title]);
                   }}
                 >
-                  <img src={e.thumbnail.url} alt=""></img>
-                  {e.title}
+                  {e.thumbnail && <img src={e.thumbnail.url} alt=""></img>}
+                  <p>{e.title}</p>
                 </a>
-              )}
+              }
               {e.description}
             </div>
           ))}
@@ -61,10 +58,13 @@ const Search = () => {
   return (
     <div>
       <input
+        className="searchBar"
         placeholder="Search..."
         onChange={(event) => fetchArticles(event.target.value)}
       />
-      <button onClick={handleClick}>History</button>
+      <button className="button" onClick={handleClick}>
+        {showHistory ? "hide" : "show history"}
+      </button>
       <div>{showHistory ? history.map((e) => <div>{e} </div>) : ""}</div>
       {showArticle && <Page id={id} />}
       {!showArticle && showList()}

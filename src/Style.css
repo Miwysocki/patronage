@@ -1,17 +1,33 @@
-/* .tile {
+.tile {
   display: grid;
   padding: 1rem;
-} */
+  border-style: solid;
+  border-width: 2px;
 
-/* .tile {
-  background: rgba(0, 0, 0, 0.4);
-  bottom: 70px;
-  color: #fff;
-  left: 45%;
-  line-height: 1;
-  padding: 10px 20px;
-  position: absolute;
-  white-space: normal;
-  justify-content: center;
-  align-items: center;
-} */
+  text-align: center;
+}
+.tile > img {
+  height: 20px;
+}
+
+.button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  position: relative;
+  left: 300px;
+  height: 40px;
+}
+
+.searchBar {
+  border: 3px solid #4caf50;
+  height: 40px;
+  width: 300px;
+  font-size: 16px;
+  text-align: center;
+  left: 50%;
+}

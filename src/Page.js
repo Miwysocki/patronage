@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import "./Style.css";
 
 const Page = (props) => {
   const [id, setId] = useState(props.id);
@@ -14,8 +15,6 @@ const Page = (props) => {
 
   useEffect(() => {
     fetchPage();
-    document.title = `Klknięto ${language} razy`;
-    console.log("zmieniono " + language + " id: " + id);
   }, [language]);
 
   async function fetchPage() {
@@ -52,10 +51,10 @@ const Page = (props) => {
         {languagesList ? (
           <div>
             <select
+              defaultValue={"DEFAULT"}
+              className="languagesSelect"
               name="languages"
               onChange={(event) => {
-                console.log("code target " + event.target.value);
-
                 languagesList.forEach((e) => {
                   if (e.code == event.target.value) {
                     setId(e.key);
@@ -64,11 +63,13 @@ const Page = (props) => {
                 });
               }}
             >
-              <option selected disabled>
+              <option value="DEFAULT" disabled>
                 See in different language
               </option>
               {languagesList.map((e) => (
-                <option value={e.code}>{e.name}</option>
+                <option key={e.code} value={e.code}>
+                  {e.name}
+                </option>
               ))}
             </select>
           </div>
